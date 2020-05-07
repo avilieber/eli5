@@ -154,7 +154,7 @@ class PermutationImportance(BaseEstimator, MetaEstimatorMixin):
         self.n_iter = n_iter
         self.random_state = random_state
         self.cv = cv
-        self.rng_ = check_random_state(random_state)
+        #self.rng_ = check_random_state(random_state)
 
     def _wrap_scorer(self, base_scorer, pd_columns):
         def pd_scorer(model, X, y):
@@ -187,6 +187,7 @@ class PermutationImportance(BaseEstimator, MetaEstimatorMixin):
         self : object
             Returns self.
         """
+        self.rng_ = check_random_state(self.random_state)
         self.scorer_ = check_scoring(self.estimator, scoring=self.scoring)
 
         if pandas_available and isinstance(X, pd.DataFrame):
